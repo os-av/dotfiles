@@ -1,0 +1,22 @@
+#!/bin/bash
+
+bat="$(cat /sys/class/power_supply/BAT0/capacity)"
+stat="$(cat /sys/class/power_supply/BAT0/status)"
+
+if [[ $bat -gt 75 ]] 
+then
+	icon=" "
+elif [[ $bat -gt 60 ]]
+then
+	icon=" "
+elif [[ $bat -gt 40 ]]
+then
+	icon=" "
+elif [[ $bat -gt 20 ]]
+then
+	icon=" "
+else
+	icon=" "
+fi
+
+echo "$icon$bat%"
