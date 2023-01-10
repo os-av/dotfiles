@@ -1,6 +1,0 @@
-#!/bin/sh
-setxkbmap gb &
-unclutter &
-fehbg&
-picom --experimental-backend &
-dwmblocks &

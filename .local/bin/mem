@@ -2,4 +2,4 @@
 
 usage="$(free -m | awk 'NR==2{printf "%d/%d MiB", $3, $2}')"
 
-echo $usage
+echo  $usage
