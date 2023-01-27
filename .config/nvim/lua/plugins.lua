@@ -18,6 +18,7 @@ end
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'nanotech/jellybeans.vim' -- Colorscheme
+	use 'chriskempson/base16-vim'
     use 'scrooloose/nerdtree'     -- File tree browser
     use 'jistr/vim-nerdtree-tabs'
     use "lukas-reineke/indent-blankline.nvim"  -- Indent lines

@@ -1,6 +1,6 @@
 setxkbmap gb &
 unclutter &
 fehbg --timeout 3 &
-picom --experimental-backend &
 dwmblocks &
+picom --experimental-backend &
 exec dwm

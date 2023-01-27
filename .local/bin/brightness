@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cur="$(brightnessctl get)"
+max="$(brightnessctl max)"
+perc="$((100* $cur/$max))"
+
+echo " $perc%"

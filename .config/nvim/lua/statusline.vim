@@ -44,3 +44,5 @@ function! CheckBackspace() abort
 	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+set t_Co=256
+set termguicolors

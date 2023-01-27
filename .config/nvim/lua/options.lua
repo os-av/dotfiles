@@ -3,7 +3,7 @@ local opt = vim.opt
 
 opt.number = true
 opt.showmatch = true
-opt.colorcolumn = '80,100'
+opt.colorcolumn = '80,100,120'
 opt.laststatus = 2
 opt.pastetoggle = '<F2>'
 opt.cursorline = true
