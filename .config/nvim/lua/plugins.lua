@@ -1,6 +1,5 @@
-local fn = vim.fn
-
 -- Packer installation
+local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if fn.empty(fn.glob(install_path)) > 0 then
 	PACKER_BOOTSTRAP = fn.system {
@@ -11,23 +10,46 @@ if fn.empty(fn.glob(install_path)) > 0 then
 		"https://github.com/wbthomason/packer.nvim",
 		install_path,
 	}
-	print "installing packer, reopen nvim"
+	print "Installing packer, reopen Neovim"
 	vim.cmd [[packadd packer.nvim]]
 end
 
 return require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-    use 'nanotech/jellybeans.vim' -- Colorscheme
-	use 'chriskempson/base16-vim'
-    use 'scrooloose/nerdtree'     -- File tree browser
-    use 'jistr/vim-nerdtree-tabs'
-    use "lukas-reineke/indent-blankline.nvim"  -- Indent lines
+	-- Packer can manage itself
+	use 'wbthomason/packer.nvim'
+	use {
+  		'nvim-telescope/telescope.nvim', tag = '0.1.1',
+		-- or                          , branch = '0.1.x',
+  		requires = { {'nvim-lua/plenary.nvim'} 
+		}
+	}
+	use 'nanotech/jellybeans.vim' -- Colorscheme
+	use ('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+	use 'tpope/vim-fugitive'
+	use {
+  		'VonHeikemen/lsp-zero.nvim',
+  		branch = 'v1.x',
+  		requires = {
+    			-- LSP Support
+    			{'neovim/nvim-lspconfig'},             -- Required
+    			{'williamboman/mason.nvim'},           -- Optional
+    			{'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-	use 'itchyny/lightline.vim'   -- Statusline
-	use 'tpope/vim-fugitive'      -- Git integration
+    			-- Autocompletion
+    			{'hrsh7th/nvim-cmp'},         -- Required
+    			{'hrsh7th/cmp-nvim-lsp'},     -- Required
+    			{'hrsh7th/cmp-buffer'},       -- Optional
+    			{'hrsh7th/cmp-path'},         -- Optional
+    			{'saadparwaiz1/cmp_luasnip'}, -- Optional
+    			{'hrsh7th/cmp-nvim-lua'},     -- Optional
 
-	-- LSP
-    use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
-	use 'hrsh7th/nvim-compe'
+    			-- Snippets
+    			{'L3MON4D3/LuaSnip'},             -- Required
+    			{'rafamadriz/friendly-snippets'}, -- Optional
+  		}
+	}
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 end)

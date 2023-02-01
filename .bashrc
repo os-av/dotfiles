@@ -17,7 +17,8 @@ export VISUAL=nvim;
 # If terminal is st, modify user prompt and set window title to cur dir
 p='[\u@\h \W]\$ '
 if [[ $term = "st" ]]; then
-	p="[\u@\H] {\W} \$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\n\\$ \[$(tput sgr0)\]"
+	# p="[\u@\H] {\W} \$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\n\\$ \[$(tput sgr0)\]"
+	p="$ "
     PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\~}\007"'
 fi
 

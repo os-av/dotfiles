@@ -1,6 +1,7 @@
 setxkbmap gb &
-unclutter &
-fehbg --timeout 3 &
+unclutter --timeout 3 &
+fehbg &
 dwmblocks &
-picom --experimental-backend &
+dbus-update-activation-environment --all &
+gnome-keyring-daemon --start --components=secrets &
 exec dwm
