@@ -1,0 +1,15 @@
+#!/bin/bash
+
+ethstatus="$(cat /sys/class/net/enp0s25/operstate 2>/dev/null)"
+if [[ $ethstatus == up ]]
+then
+    echo " Up"
+else
+    wifistatus="$(cat /sys/class/net/w*/operstate 2>/dev/null)"
+    if [[ $wifistatus == up ]]
+    then
+        echo " Up"
+    else
+        echo " Down"
+    fi
+fi

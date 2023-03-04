@@ -52,4 +52,14 @@ return require('packer').startup(function(use)
         'nvim-lualine/lualine.nvim',
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
+    use 'lukas-reineke/indent-blankline.nvim'
+    use 'preservim/nerdtree'
+    use 'jistr/vim-nerdtree-tabs'
+    use 'EdenEast/nightfox.nvim'
+    use {
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional, for file icons
+        },
+    }
 end)

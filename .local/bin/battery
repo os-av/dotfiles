@@ -1,22 +1,35 @@
 #!/bin/bash
 
-bat="$(cat /sys/class/power_supply/BAT0/capacity)"
-stat="$(cat /sys/class/power_supply/BAT0/status)"
-
-if [[ $bat -gt 85 ]] 
-then
-	icon=" "
-elif [[ $bat -gt 60 ]]
-then
-	icon=" "
-elif [[ $bat -gt 40 ]]
-then
-	icon=" "
-elif [[ $bat -gt 15 ]]
-then
-	icon=" "
+if [ ! -d "/sys/class/power_supply/BAT0/" ]; then
+    echo ""
 else
-	icon=" "
-fi
+    bat="$(cat /sys/class/power_supply/BAT0/capacity)"
+    stat="$(cat /sys/class/power_supply/BAT0/status)"
 
-echo "$icon$bat%"
+    if [[ $stat != "Discharging" ]]; then
+        echo " $bat%"
+    else
+        if [[ $bat -gt 85 ]] 
+        then
+	        icon=" "
+        elif [[ $bat -gt 60 ]]
+        then
+	        icon=" "
+        elif [[ $bat -gt 40 ]]
+        then
+	        icon=" "
+        elif [[ $bat -gt 15 ]]
+        then
+	        icon=" "
+        else
+	        icon=" "
+        fi
+
+        if [[ $bat -le 15 ]]
+        then
+            echo "!! $icon$bat% !!"
+        else
+            echo "$icon$bat%"
+        fi
+    fi
+fi
