@@ -1,0 +1,25 @@
+#/bin/bash
+
+cmus-remote --pause
+status="$(cmus-remote -Q | grep 'status')"
+if [[ $status == "" ]]; then
+    dunstify -a "cmuspause" -u low -r 9994 "Music Control" "Not running" -t 5000
+    exit 1
+fi
+
+artist="$(cmus-remote -Q | grep 'artist' | tail -1 | cut -d " " -f3-)"
+album="$(cmus-remote -Q | grep 'tag album' | head -1 | cut -d " " -f3-)"
+song="$(cmus-remote -Q | grep 'title' | cut -d " " -f3-)"
+
+duration="$(cmus-remote -Q | grep 'duration' | cut -d " " -f2-)"
+position="$(cmus-remote -Q | grep 'position' | cut -d " " -f2-)"
+perc="$((100*$position/$duration))"
+
+actualtime="$(printf '%02d:%02d/%02d:%02d' $(($position%3600/60)) $(($position%60)) $(($duration%3600/60)) $(($duration%60)))"
+echo $actualtime
+
+if [[ $status == "status playing" ]]; then
+    dunstify -a "cmuspause" -u low -r 9994 -h int:value:"$perc" "Music Control - Playing" "$artist\n$album\n$song\n$actualtime" -t 5000
+elif [[ $status == "status paused" ]]; then 
+    dunstify -a "cmuspause" -u low -r 9994 -h int:value:"$perc" "Music Control - Paused" "$artist\n$album\n$song\n$actualtime" -t 5000
+fi

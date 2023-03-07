@@ -4,4 +4,4 @@ cur="$(brightnessctl get)"
 max="$(brightnessctl max)"
 perc="$((100* $cur/$max))"
 
-dunstify -a "changebrightness" -u low -r 9993 -h int:value:"$perc" "Brightness: ${perc}%" -t 2000
+dunstify -a "changebrightness" -u low -r 9993 -h int:value:"$perc" "Brightness Control" "${perc}%" -t 2000
