@@ -1,0 +1,10 @@
+#!/bin/bash
+
+vol=$(amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]%')
+status=$(amixer get Master | awk '$0~/%/{print $6}' | tr -d '[]%')
+
+if [ $status == "off" ]; then
+    dunstify -a "changevolume" -r 9993 -h int:value:"$vol" "Volume Control" "${vol}% (Muted)" -t 2000
+else
+    dunstify -a "changevolume" -r 9993 -h int:value:"$vol" "Volume Control" "${vol}%" -t 2000
+fi

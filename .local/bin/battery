@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ ! -d "/sys/class/power_supply/BAT0/" ]; then
+    echo "🔌"
+else
+    bat="$(cat /sys/class/power_supply/BAT0/capacity)"
+    stat="$(cat /sys/class/power_supply/BAT0/status)"
+
+    if [[ $stat != "Discharging" ]]; then
+        echo "🔌$bat%"
+    else
+        if [[ $bat -gt 15 ]]
+        then
+	        icon="🔋"
+        else
+	        icon="🪫"
+        fi
+        echo "$icon$bat%"
+    fi
+fi

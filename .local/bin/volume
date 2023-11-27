@@ -1,0 +1,15 @@
+#!/bin/bash
+
+status=$(amixer get Master | awk '$0~/%/{print $6}' | tr -d '[]%')
+vol=$(amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]%')
+
+if [ $status == "off" ]; then
+  echo "🔇$vol%"
+else
+  if [[ $vol -gt 50 ]]
+  then
+	echo "🔊$vol%"
+  else
+	echo "🔉$vol%"
+  fi
+fi
